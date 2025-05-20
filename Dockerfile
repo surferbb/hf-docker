@@ -10,7 +10,7 @@ RUN apt-get update && apt-get install -y \
     libssl-dev \
     && rm -rf /var/lib/apt/lists/*
 
-WORKDIR /app/daddylive  # Önce çalışma dizinine geç
+WORKDIR /app/daddylive  # pass to work dir
 
 RUN git pull || git clone https://github.com/pigzillaaaaa/daddylive .
 
