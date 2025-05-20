@@ -20,7 +20,7 @@ jobs:
       - name: Dockerfile içerisine zaman damgası ekle
         run: |
           NOWDATE=$(date "+%Y-%m-%d %H:%M:%S")
-          sed -i "/^RUN git clone/a RUN echo 'Rebuild at $NOWDATE' >> /app/rebuild.log" Dockerfile
+          sed -i "/^RUN pip install/a RUN echo 'Rebuild at $NOWDATE' >> /app/rebuild.log" Dockerfile
 
       - name: Geçerli hale getir
         run: |
