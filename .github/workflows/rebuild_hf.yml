@@ -29,7 +29,7 @@ jobs:
           git config --global user.name "🔥 Latte HF Rebuilder 🔥"
           git config --global user.email "GitLatte@github.com"
           git add Dockerfile
-          git commit -m "♻️ otomatik rebuild işlemi $NOWDATE"
+          git commit -m "♻️ Success rebuild to HuggingFace space $NOWDATE"
           git push -f https://oauth2:${{ secrets.HF_TOKEN }}@huggingface.co/spaces/${{ secrets.HF_SPACE_NAME }} main
         env:
           HF_SPACE_NAME: ${{ vars.HF_SPACE_NAME }}
