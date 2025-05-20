@@ -26,8 +26,8 @@ jobs:
 
       - name: Commit and push it HuggingFace
         run: |
-          git config --global user.email "action@github.com"
-          git config --global user.name "GitHub Action"
+          git config --global user.name "🔥 Latte HF Rebuilder 🔥"
+          git config --global user.email "GitLatte@github.com"
           git add Dockerfile
           git commit -m "♻️ otomatik rebuild işlemi $NOWDATE"
           git push -f https://oauth2:${{ secrets.HF_TOKEN }}@huggingface.co/spaces/${{ secrets.HF_SPACE_NAME }} main
