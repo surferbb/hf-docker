@@ -1,0 +1,29 @@
+name: Engelleri kaldır
+on:
+  schedule:
+    - cron: '0 */2 * * *'
+  workflow_dispatch:
+
+jobs:
+  sync-repo:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Dockerfile içerisine zaman damgası ekle
+        run: |
+          NOWDATE=$(date "+%Y-%m-%d %H:%M:%S")
+          sed -i "5 a RUN echo 'Rebuild at $NOWDATE' >> /app/rebuild.log" Dockerfile
+
+      - name: Geçerli hale getir
+        run: |
+          git config --global user.email "action@github.com"
+          git config --global user.name "GitHub Action"
+          git add Dockerfile
+          git commit -m "♻️ otomatik rebuild işlemi $NOWDATE"
+          git push -f https://oauth2:${{ secrets.HF_TOKEN }}@huggingface.co/spaces/${{ secrets.HF_SPACE_NAME }} main
+        env:
+          HF_SPACE_NAME: ${{ vars.HF_SPACE_NAME }}
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
