@@ -1,2 +1,9 @@
-# hf-docker
-To make it rebuild automatically
+---
+title: Engelsiz
+emoji: 📚
+colorFrom: indigo
+colorTo: green
+sdk: docker
+pinned: false
+short_description: Engelsiz
+---
