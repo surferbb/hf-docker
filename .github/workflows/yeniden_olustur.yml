@@ -12,6 +12,11 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Set timezone to Europe/Istanbul
+        run: |
+          sudo timedatectl set-timezone Europe/Istanbul
+          export TZ="Europe/Istanbul"
+
       - name: Dockerfile içerisine zaman damgası ekle
         run: |
           NOWDATE=$(date "+%Y-%m-%d %H:%M:%S")
