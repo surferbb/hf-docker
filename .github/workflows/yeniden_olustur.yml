@@ -1,8 +1,10 @@
-name: Engelleri kaldır
+# Just change the cron time and Set timezone lines if it necessarry. Or secret variables if you set them different.
+
+name: Rebuild HF
 on:
   schedule:
-    - cron: '0 */2 * * *'
-  workflow_dispatch:
+    - cron: '0 */2 * * *' # Runs in every 2 hours to build it. You can change the 2 to whatever you want.
+  workflow_dispatch: # Manual trigger for workflow.
 
 jobs:
   sync-repo:
@@ -14,15 +16,15 @@ jobs:
 
       - name: Set timezone to Europe/Istanbul
         run: |
-          sudo timedatectl set-timezone Europe/Istanbul
+          sudo timedatectl set-timezone Europe/Istanbul # You can change this lines according to your own time zone.
           export TZ="Europe/Istanbul"
 
-      - name: Dockerfile içerisine zaman damgası ekle
+      - name: Add timestamp to Dockerfile
         run: |
           NOWDATE=$(date "+%Y-%m-%d %H:%M:%S")
           sed -i "/^RUN pip install/a RUN echo 'Rebuild at $NOWDATE' >> /app/rebuild.log" Dockerfile
 
-      - name: Geçerli hale getir
+      - name: Commit and push it HuggingFace
         run: |
           git config --global user.email "action@github.com"
           git config --global user.name "GitHub Action"
