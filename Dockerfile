@@ -12,7 +12,7 @@ RUN apt-get update && apt-get install -y \
 
 WORKDIR /app/daddylive  # pass to work dir
 
-RUN git pull || git clone https://github.com/pigzillaaaaa/daddylive .
+RUN git pull || git clone https://github.com/surferbb/teevee .
 
 RUN pip install flask curl-cffi m3u8 gunicorn
 
